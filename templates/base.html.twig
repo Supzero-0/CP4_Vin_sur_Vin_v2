@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<link rel="icon" type="image/png" href="{{ asset('build/images/favicon.png') }}"/>
+		<link rel="icon" type="image/png" href="{{ asset('build/images/VinsSurVins_1.svg') }}"/>
 		<title>
 			{% block title %}Vin sur Vin
 			{% endblock %}
@@ -16,7 +16,9 @@
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
+	{% include "shared/_navbar.html.twig" %}
 	<body>
 		{% block body %}{% endblock %}
 	</body>
+	{% include "shared/_footer.html.twig" %}
 </html>

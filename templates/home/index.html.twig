@@ -1,15 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Vin sur Vin
+{% endblock %}
 
 {% block body %}
-    <div class="pink-stripe">
-        <h1>
-            Let's start coding&nbsp;&#129304;
-        </h1>
-    </div>
-    <div class="white-stripe">
-        <img src="{{ asset('build/images/LOGO_WILD_CODE_SCHOOL.png') }}"
-             alt="">
-    </div>
+	<section class="row align-items-center justify-content-around mx-3 mb-5">
+		<div class="align-self-start col-xl-6 col-lg-10 col-md-10 col-sm-11 col-xs-11">
+			<h1 class="mt-5 mb-5 text-center">Achetez votre vin directement à la source</h1>
+			<br>
+			<p class="fs-4 text-center">Ce site a pour vocation de permettre à de petits exploitants d'avoir de la visibilité sur internet.<br>
+				En passant par notre plateforme pour boire votre canon, vous contribuez à sauver les petits vignerons.<br>
+				Vous trouverez ici des vins que vous n'auriez jamais découverts ailleurs.
+			</p>
+		</div>
+		<div class="col-xl-5 col-lg-7 col-md-9 col-sm-11 col-xs-12 my-3">
+			<img src="{{ asset('build/images/bouteilles-de-vin.jpg') }}" alt="logo vins sur vins" class="img-fluid">
+		</div>
+	</section>
+	<h2 class="mt-5 text-center">Vous voulez proposer votre vin sur le site ?</h2>
+	<h2 class="mb-5 text-center fs-4">Contactez l'équipe via ce formulaire</h2>
 {% endblock %}

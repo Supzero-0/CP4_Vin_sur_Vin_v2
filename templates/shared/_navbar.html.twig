@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg bg-primary">
+	<div class="container-fluid">
+		<a class="navbar-brand" data-bs-toggle="collapse" data-bs-target="#collapseNavbar" aria-expanded="false" aria-controls="collapseNavbar">
+			<img src="{{ asset('build/images/VinsSurVins_1.svg') }}" alt="Vin sur Vin" width="100" height="60">
+		</a>
+		<div class="collapse navbar-collapse" id="collapseNavbar">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" href="/">Accueil</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/catalogue">Catalogue</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/partenaires">Partenaires</a>
+				</li>
+			</ul>
+			<li class="nav-item me-3">
+				<div class="btn-group" role="group" aria-label="Button group darkmode">
+					<button type="button" class="btn btn-success" data-bs-theme-value="light">
+						<i class="bi bi-sun-fill"></i>
+					</button>
+					<button type="button" class="btn btn-success" data-bs-theme-value="dark">
+						<i class="bi bi-moon-stars-fill"></i>
+					</button>
+				</div>
+			</li>
+			<form class="d-flex" role="search">
+				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-success" type="submit">Search</button>
+			</form>
+		</div>
+	</div>
+</nav>

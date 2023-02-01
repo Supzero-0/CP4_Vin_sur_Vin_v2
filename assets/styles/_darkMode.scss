@@ -1,5 +1,18 @@
 $color-mode-type: data;
 
-@include color-mode(light) {}
+.copyright {
+    background-color: rgba(0, 0, 0, 0.2);
+}
 
-@include color-mode(dark) {}
+@include color-mode(light) {
+
+    //#6c757d gris clair fond carte
+
+}
+
+@include color-mode(dark) {
+
+    //#343a40 gris foncé fond carte
+    //body bg #212529
+
+}
