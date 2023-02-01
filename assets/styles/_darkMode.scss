@@ -6,11 +6,27 @@ $color-mode-type: data;
 
 @include color-mode(light) {
 
+    .textDM {
+        color: black;
+    }
+
+    .btnDM {
+        color: black;
+    }
+
     //#6c757d gris clair fond carte
 
 }
 
 @include color-mode(dark) {
+
+    .textDM {
+        color: white;
+    }
+
+    .btnDM {
+        color: white;
+    }
 
     //#343a40 gris foncé fond carte
     //body bg #212529
