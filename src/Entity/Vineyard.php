@@ -21,13 +21,9 @@ class Vineyard
     #[ORM\OneToMany(mappedBy: 'vineyard', targetEntity: Wine::class)]
     private Collection $wines;
 
-    #[ORM\OneToMany(mappedBy: 'vineyard', targetEntity: Appellation::class)]
-    private Collection $appellations;
-
     public function __construct()
     {
         $this->wines = new ArrayCollection();
-        $this->appellations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -71,36 +67,6 @@ class Vineyard
             // set the owning side to null (unless already changed)
             if ($wines->getVineyard() === $this) {
                 $wines->setVineyard(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Appellation>
-     */
-    public function getAppellations(): Collection
-    {
-        return $this->appellations;
-    }
-
-    public function addAppellation(Appellation $appellation): self
-    {
-        if (!$this->appellations->contains($appellation)) {
-            $this->appellations->add($appellation);
-            $appellation->setVineyard($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAppellation(Appellation $appellation): self
-    {
-        if ($this->appellations->removeElement($appellation)) {
-            // set the owning side to null (unless already changed)
-            if ($appellation->getVineyard() === $this) {
-                $appellation->setVineyard(null);
             }
         }
 

@@ -33,10 +33,6 @@ class Wine
     #[ORM\JoinColumn(nullable: false)]
     private ?Vineyard $vineyard = null;
 
-    #[ORM\ManyToOne(inversedBy: 'wines')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Appellation $appellation = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -110,18 +106,6 @@ class Wine
     public function setVineyard(?Vineyard $vineyard): self
     {
         $this->vineyard = $vineyard;
-
-        return $this;
-    }
-
-    public function getAppellation(): ?Appellation
-    {
-        return $this->appellation;
-    }
-
-    public function setAppellation(?Appellation $appellation): self
-    {
-        $this->appellation = $appellation;
 
         return $this;
     }
