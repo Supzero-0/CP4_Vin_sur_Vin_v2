@@ -7,20 +7,31 @@
 	{% if error %}
 		<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 	{% endif %}
+	<div class="container">
+		<div class="row mx-4">
+			<div class="mx-4 my-4">
+				<div class="align-middle d-flex flex-column align-items-center">
+					<h1 class="text-center col-6 mb-3">Connexion</h1>
+					<div class="bg-primary col-6 shadow rounded">
+						<form action="{{ path('app_login') }}" method="post" class="d-flex flex-column px-4 py-3">
+							<label for="username">E-mail:</label>
+							<input type="text" id="username" name="_username" value="{{ last_username }}">
 
-	<form action="{{ path('app_login') }}" method="post">
-		<label for="username">E-mail:</label>
-		<input type="text" id="username" name="_username" value="{{ last_username }}">
+							<label for="password" class="mt-3">Mot de passe:</label>
+							<input type="password" id="password" name="_password">
 
-		<label for="password">Mot de passe:</label>
-		<input type="password" id="password" name="_password">
+							<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-		<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-		<button type="submit">Se connecter</button>
-	</form>
-	<a class="textDM" href="{{ path('app_register') }}">S'enregistrer</a>
-	<a class="textDM" href="{{ path('app_forgot_password_request') }}">Password forgotten ?</a>
-
+							<button type="submit" class="mt-4 btn btn-success">Se connecter</button>
+						</form>
+						<div class="d-flex flex-column">
+							<a class="textDM text-center mb-2" href="{{ path('app_register') }}">S'enregistrer</a>
+							<a class="textDM text-center mb-3" href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 {% endblock %}

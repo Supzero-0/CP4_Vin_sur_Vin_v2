@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,11 +20,8 @@ class EmailVerifier extends AbstractController
     ) {
     }
 
-    public function sendEmailConfirmation(string $verifyEmailRouteName, TemplatedEmail $email): void
+    public function sendEmailConfirmation(string $verifyEmailRouteName, User $user, TemplatedEmail $email): void
     {
-        /** @var \App\Entity\User $user */
-        $user = $this->getUser();
-
         $signatureComponents = $this->verifyEmailHelper->generateSignature(
             $verifyEmailRouteName,
             $user->getId(),
@@ -43,11 +41,8 @@ class EmailVerifier extends AbstractController
     /**
      * @throws VerifyEmailExceptionInterface
      */
-    public function handleEmailConfirmation(Request $request): void
+    public function handleEmailConfirmation(Request $request, User $user): void
     {
-        /** @var \App\Entity\User $user */
-        $user = $this->getUser();
-
         $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
 
         $user->setIsVerified(true);
