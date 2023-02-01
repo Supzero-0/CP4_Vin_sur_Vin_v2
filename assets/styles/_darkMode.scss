@@ -1,0 +1,5 @@
+$color-mode-type: data;
+
+@include color-mode(light) {}
+
+@include color-mode(dark) {}
