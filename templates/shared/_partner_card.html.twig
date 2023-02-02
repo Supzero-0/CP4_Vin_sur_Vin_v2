@@ -1,0 +1,20 @@
+<div class="container rounded bg-primary col-12 mx-4 my-4" id="partner_{{loop.index}}">
+	<div class="card-body d-flex {{ key is even ? 'flex-row' : 'flex-row-reverse' }}">
+		<div class="col-4">
+			{% if app.user.picture %}
+				<img class="card-img-top img-thumbnail img-fluid mx-auto d-block rounded" src="{{ vich_uploader_asset(app.user.picture) }}" alt="{{ app.user.domain }}">
+			{% else %}
+				<img class="card-img-top img-thumbnail img-fluid mx-auto d-block rounded" src="{{ asset('/build/images/partner.jpeg') }}" alt="Photo de profil">
+			{% endif %}
+		</div>
+		<ul class="list-group list-group-flush col-8 text-center px-0">
+			<li class="list-group-item bg-primary textDM">- Partenaires -<br>
+				{{ user.firstname }}
+				{{ user.lastname }}</li>
+			<li class="list-group-item bg-primary textDM">- Domaine -<br>
+				{{ user.domain }}</li>
+			<li class="list-group-item bg-primary textDM">Vignoble -
+				{{ user.email }}</li>
+		</ul>
+	</div>
+</div>

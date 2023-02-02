@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil
+{% endblock %}
+
+{% block body %}
+	<h2 class="m-5">Mon profil</h2>
+
+	<div class="idea_card_header col-4 m-5 row p-3 border rounded-top border-3 bg-light">
+		<div class="col-8">
+			<p class="text_user fw-bold">{{ app.user.firstname }}
+				{{ app.user.lastname }}</p>
+			<p class="text_user">{{ app.user.domain }}</p>
+			<p class="text_user">{{ app.user.email }}</p>
+		</div>
+		<div class="user_picture col-4">
+			{% if app.user.picture %}
+				<img class="card-img-top img-thumbnail img-fluid mx-auto d-block rounded" src="{{ vich_uploader_asset(app.user.picture) }}" alt="{{ app.user.domain }}"><br>
+
+			{% else %}
+				<img class="card-img-top img-thumbnail img-fluid mx-auto d-block rounded" src="{{ asset('/build/images/partner.jpeg') }}" alt="Photo de profil">
+			{% endif %}
+		</div>
+	</div>
+
+	<div class="col-6 m-5">
+		{{ form_start(form) }}
+		{{ form_widget(form) }}
+		{{ form_end(form) }}
+	</div>
+
+
+{% endblock %}

@@ -3,10 +3,16 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateTime;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -31,6 +37,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
+
+    #[ORM\OneToMany(mappedBy: 'partner', targetEntity: Wine::class)]
+    private Collection $wines;
+
+    #[ORM\Column(length: 255)]
+    private ?string $firstname = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $lastname = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $domain = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $profilePicture = null;
+
+    #[Vich\UploadableField(mapping: 'profile_file', fileNameProperty: 'profile')]
+    private ?File $profileFile = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?DateTime $updateAt = null;
+
+    public function __construct()
+    {
+        $this->wines = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -110,6 +143,110 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Wine>
+     */
+    public function getWines(): Collection
+    {
+        return $this->wines;
+    }
+
+    public function addWine(Wine $wine): self
+    {
+        if (!$this->wines->contains($wine)) {
+            $this->wines->add($wine);
+            $wine->setPartner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWine(Wine $wine): self
+    {
+        if ($this->wines->removeElement($wine)) {
+            // set the owning side to null (unless already changed)
+            if ($wine->getPartner() === $this) {
+                $wine->setPartner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(string $lastname): self
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getDomain(): ?string
+    {
+        return $this->domain;
+    }
+
+    public function setDomain(?string $domain): self
+    {
+        $this->domain = $domain;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->profilePicture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->profilePicture = $picture;
+
+        return $this;
+    }
+
+    public function setProfileFile(File $image = null): User
+    {
+        $this->profileFile = $image;
+        if ($image) {
+            $this->updateAt = new DateTime('now');
+        }
+        return $this;
+    }
+
+    public function getProfileFile(): ?File
+    {
+        return $this->profileFile;
+    }
+
+    public function getUpdateAt(): ?DateTime
+    {
+        return $this->updateAt;
+    }
+
+    public function setUpdateAt(?DateTime $updateAt): self
+    {
+        $this->updateAt = $updateAt;
 
         return $this;
     }

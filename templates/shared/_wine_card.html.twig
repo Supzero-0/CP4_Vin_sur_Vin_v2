@@ -1,0 +1,28 @@
+<div class="container rounded bg-primary col-3 mx-4 my-4">
+	<div class="card-body row justify-content-center">
+		<div class="col-10 pt-4 pb-3">
+			{% if wine.picture %}
+				<img class="card-img-top img-thumbnail img-fluid mx-auto d-block rounded" src="{{ vich_uploader_asset(wine) }}" alt="{{ wine.name }}">
+			{% else %}
+				<img class="card-img-top img-thumbnail img-fluid mx-auto d-block rounded" src="{{ asset('/build/images/vin_dessin.jpg') }}" alt="vin dessin">
+			{% endif %}
+		</div>
+		<ul class="list-group list-group-flush text-center px-0">
+			<li class="list-group-item bg-primary textDM">- Partenaires -<br>
+				{{ wine.partner.firstname }}
+				{{ wine.partner.lastname }}</li>
+			<li class="list-group-item bg-primary textDM">- Domaine -<br>
+				{{ wine.partner.domain }}</li>
+			<li class="list-group-item bg-primary textDM">Vignoble -
+				{{ wine.vineyard.name }}</li>
+			<li class="list-group-item bg-primary textDM">Couleur -
+				{{ wine.color }}</li>
+			<li class="list-group-item bg-primary textDM">Année -
+				{{ wine.year }}</li>
+			<li class="list-group-item bg-primary textDM">Prix -
+				{{ wine.price }}</li>
+			<li class="list-group-item bg-primary textDM rounded-bottom">- Description -
+				<br>{{ wine.description }}</li>
+		</ul>
+	</div>
+</div>

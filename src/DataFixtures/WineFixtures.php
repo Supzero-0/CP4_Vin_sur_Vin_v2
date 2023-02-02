@@ -38,7 +38,9 @@ class WineFixtures extends Fixture
             $wine->setPrice($faker->numberBetween(6, 25));
             $wine->setDescription($faker->realText($faker->numberBetween(150, 300)));
             $wine->setVineyard($this->getReference($faker->randomElement(self::VINEYARD)));
+            $wine->setPartner($this->getReference('partner_' . $faker->numberBetween(0, 24)));
             $manager->persist($wine);
+            $this->addReference('wine_' . $i, $wine);
         }
 
         $manager->flush();
@@ -49,6 +51,7 @@ class WineFixtures extends Fixture
         // Tu retournes ici toutes les classes de fixtures dont ProgramFixtures dépend
         return [
             VineyardFixtures::class,
+            UserFixtures::class,
         ];
     }
 }

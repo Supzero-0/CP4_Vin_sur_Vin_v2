@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Catalogue
+{% block title %}User index
 {% endblock %}
 
 {% block body %}
-	<h1>Catalogue</h1>
+	<h1>Partenaires</h1>
 
 	<div class="container">
 		<div class="row justify-content-center">
-			{% for wine in wines %}
-				{% include "shared/_wine_card.html.twig" %}
+			{% for key, user in users %}
+				{% include "shared/_partner_card.html.twig" %}
 			{% else %}
 				<tr>
 					<td colspan="5">no records found</td>

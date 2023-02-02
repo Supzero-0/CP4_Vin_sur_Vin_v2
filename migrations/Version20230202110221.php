@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230201161026 extends AbstractMigration
+final class Version20230202110221 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,16 +20,12 @@ final class Version20230201161026 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE wine ADD appellation_id INT NOT NULL');
-        $this->addSql('ALTER TABLE wine ADD CONSTRAINT FK_560C64687CDE30DD FOREIGN KEY (appellation_id) REFERENCES appellation (id)');
-        $this->addSql('CREATE INDEX IDX_560C64687CDE30DD ON wine (appellation_id)');
+        $this->addSql('ALTER TABLE user ADD picture VARCHAR(255) DEFAULT NULL, ADD update_at DATETIME DEFAULT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE wine DROP FOREIGN KEY FK_560C64687CDE30DD');
-        $this->addSql('DROP INDEX IDX_560C64687CDE30DD ON wine');
-        $this->addSql('ALTER TABLE wine DROP appellation_id');
+        $this->addSql('ALTER TABLE user DROP picture, DROP update_at');
     }
 }

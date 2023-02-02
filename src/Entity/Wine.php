@@ -3,8 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\WineRepository;
+use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: WineRepository::class)]
 class Wine
@@ -26,12 +29,22 @@ class Wine
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
+    #[Vich\UploadableField(mapping: 'picture_file', fileNameProperty: 'picture')]
+    private ?File $pictureFile = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?DateTime $updateAt = null;
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
     #[ORM\ManyToOne(inversedBy: 'wines')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Vineyard $vineyard = null;
+
+    #[ORM\ManyToOne(inversedBy: 'wines')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $partner = null;
 
     public function getId(): ?int
     {
@@ -86,6 +99,32 @@ class Wine
         return $this;
     }
 
+    public function setPosterFile(File $image = null): Wine
+    {
+        $this->pictureFile = $image;
+        if ($image) {
+            $this->updateAt = new DateTime('now');
+        }
+        return $this;
+    }
+
+    public function getPosterFile(): ?File
+    {
+        return $this->pictureFile;
+    }
+
+    public function getUpdateAt(): ?DateTime
+    {
+        return $this->updateAt;
+    }
+
+    public function setUpdateAt(?DateTime $updateAt): self
+    {
+        $this->updateAt = $updateAt;
+
+        return $this;
+    }
+
     public function getDescription(): ?string
     {
         return $this->description;
@@ -106,6 +145,18 @@ class Wine
     public function setVineyard(?Vineyard $vineyard): self
     {
         $this->vineyard = $vineyard;
+
+        return $this;
+    }
+
+    public function getPartner(): ?User
+    {
+        return $this->partner;
+    }
+
+    public function setPartner(?User $partner): self
+    {
+        $this->partner = $partner;
 
         return $this;
     }

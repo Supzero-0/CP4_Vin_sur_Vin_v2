@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class WineType extends AbstractType
 {
@@ -17,16 +18,14 @@ class WineType extends AbstractType
         $builder
             ->add('vineyard', EntityType::class, [
                 'class' => Vineyard::class,
-                'choice_label' => 'vineyardappellation'
-            ])
-            ->add('appellation', EntityType::class, [
-                'class' => Appellation::class,
                 'choice_label' => 'name'
             ])
             ->add('year')
             ->add('color')
             ->add('price')
-            ->add('picture')
+            ->add('pictureFile', VichFileType::class, [
+                'required'  => false,
+            ])
             ->add('description');
     }
 
