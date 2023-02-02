@@ -1,6 +1,9 @@
-<form class="d-flex flex-column px-4 py-3">
+<form class="textDM form d-flex flex-column m-3 p-3" method="post" action="#anchor">
 	{{ form_start(form) }}
 	{{ form_widget(form) }}
-	<button class="btn btn-success">{{ button_label|default('Save') }}</button>
+	<div class="text-center">
+		<button class="btn btn-success">{{ button_label|default('Ajouter un vin') }}</button>
+		<a href="{{ path('app_wine_index') }}" class="btn btn-warning">back to list</a>
+	</div>
 	{{ form_end(form) }}
 </form>

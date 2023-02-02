@@ -17,7 +17,7 @@ class ProfilePictureType extends AbstractType
             ->add('profileFile', VichFileType::class, [
                 'label' => 'Ajouter votre photo de profil',
                 'attr' => [
-                    'class' => 'form',
+                    'class' => 'textDM bodyDM mx-0 my-2',
                     'placeholder' => 'Name',
                 ],
                 'required'      => false,
@@ -25,9 +25,9 @@ class ProfilePictureType extends AbstractType
                 'download_uri' => false, // not mandatory, default is true
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Ajouter votre photo de profil',
+                'label' => 'Ajouter',
                 'attr' => [
-                    'class' => "btn-success"
+                    'class' => "btn btn-success mt-2 mb-3"
                 ]
             ]);
     }

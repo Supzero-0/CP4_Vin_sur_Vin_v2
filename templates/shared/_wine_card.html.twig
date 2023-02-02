@@ -1,27 +1,34 @@
-<div class="container rounded bg-primary col-3 mx-4 my-4">
+<div class="container rounded-5 bg-primary shadow col-3 mx-4 my-4">
 	<div class="card-body row justify-content-center">
 		<div class="col-10 pt-4 pb-3">
 			{% if wine.picture %}
-				<img class="card-img-top img-thumbnail img-fluid mx-auto d-block rounded" src="{{ vich_uploader_asset(wine) }}" alt="{{ wine.name }}">
+				<img class="card-img-top img-thumbnail img-fluid mx-auto d-block rounded-3" src="{{ vich_uploader_asset(wine) }}" alt="{{ wine.name }}">
 			{% else %}
-				<img class="card-img-top img-thumbnail img-fluid mx-auto d-block rounded" src="{{ asset('/build/images/vin_dessin.jpg') }}" alt="vin dessin">
+				<img class="card-img-top img-thumbnail img-fluid mx-auto d-block rounded-3" src="{{ asset('/build/images/vin_dessin.jpg') }}" alt="vin dessin">
 			{% endif %}
 		</div>
 		<ul class="list-group list-group-flush text-center px-0">
-			<li class="list-group-item bg-primary textDM">- Partenaires -<br>
+			<li class="list-group-item bg-primary textDM">
+				<strong>- Partenaires -</strong><br>
 				{{ wine.partner.firstname }}
 				{{ wine.partner.lastname }}</li>
-			<li class="list-group-item bg-primary textDM">- Domaine -<br>
+			<li class="list-group-item bg-primary textDM">
+				<strong>- Domaine -</strong><br>
 				{{ wine.partner.domain }}</li>
-			<li class="list-group-item bg-primary textDM">Vignoble -
+			<li class="list-group-item bg-primary textDM">
+				<strong>Vignoble -</strong>
 				{{ wine.vineyard.name }}</li>
-			<li class="list-group-item bg-primary textDM">Couleur -
+			<li class="list-group-item bg-primary textDM">
+				<strong>Couleur -</strong>
 				{{ wine.color }}</li>
-			<li class="list-group-item bg-primary textDM">Année -
+			<li class="list-group-item bg-primary textDM">
+				<strong>Année -</strong>
 				{{ wine.year }}</li>
-			<li class="list-group-item bg-primary textDM">Prix -
+			<li class="list-group-item bg-primary textDM">
+				<strong>Prix -</strong>
 				{{ wine.price }}</li>
-			<li class="list-group-item bg-primary textDM rounded-bottom">- Description -
+			<li class="list-group-item bg-primary textDM rounded-bottom-5">
+				<strong>- Description -</strong>
 				<br>{{ wine.description }}</li>
 		</ul>
 	</div>

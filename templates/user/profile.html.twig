@@ -4,30 +4,68 @@
 {% endblock %}
 
 {% block body %}
-	<h2 class="m-5">Mon profil</h2>
+	<h2 class="text-center m-5">Mon profil</h2>
+	<div class="container">
+		<div class="row justify-content-between">
+			<div class="profileCard col-5 rounded-5 m-5 bg-primary ">
+				<div class="idea_card_header col-10 mx-auto my-3 row p-3 border rounded-top border-3 bg-light">
+					<div class="col-8">
+						<p class="textMD fw-bold">{{ app.user.firstname }}
+							{{ app.user.lastname }}</p>
+						<p class="textMD">{{ app.user.domain }}</p>
+						<p class="textMD">{{ app.user.email }}</p>
+					</div>
+					<div class="col-4">
+						{% if user.profilePicture %}
+							<img class="card-img-top img-thumbnail img-fluid mx-auto d-block rounded" src="{{ vich_uploader_asset(app.user.profilePicture) }}" alt="{{ app.user.domain }}"><br>
+						{% else %}
+							<img class="card-img-top img-thumbnail img-fluid mx-auto d-block rounded" src="{{ asset('/build/images/partner.jpeg') }}" alt="Photo de profil">
+						{% endif %}
+					</div>
+				</div>
 
-	<div class="idea_card_header col-4 m-5 row p-3 border rounded-top border-3 bg-light">
-		<div class="col-8">
-			<p class="text_user fw-bold">{{ app.user.firstname }}
-				{{ app.user.lastname }}</p>
-			<p class="text_user">{{ app.user.domain }}</p>
-			<p class="text_user">{{ app.user.email }}</p>
+				<div class="col-10 mx-auto">
+					{{ form_start(form) }}
+					{{ form_widget(form) }}
+					{{ form_end(form) }}
+				</div>
+			</div>
+
+
+			<div class="col-5">
+				<h3 class="text-center m-5">Mes vins</h2>
+				<div class="text-center">
+					<a class="textDM btn btn-success" href="{{ path('app_wine_new') }}">Ajouter un nouveau vin</a><br>
+				</div>
+				{% for wine in wines %}
+					<div class="row rounded-5 my-3 bg-primary">
+						<table class="table">
+							<thead>
+								<tr>
+									<th class="textDM text-center">Couleur</th>
+									<th class="textDM text-center">Année</th>
+									<th class="textDM text-center">Prix</th>
+									<th class="textDM text-center">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="textDM text-center">{{ wine.color }}</td>
+									<td class="textDM text-center">{{ wine.year }}</td>
+									<td class="textDM text-center">{{ wine.price }}</td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				{% else %}
+					<tr>
+						<td colspan="5">
+							<p class="text-center m-5">Pas de vin mis en vente</p>
+						</td>
+					</tr>
+				{% endfor %}
+			</div>
+
 		</div>
-		<div class="user_picture col-4">
-			{% if app.user.picture %}
-				<img class="card-img-top img-thumbnail img-fluid mx-auto d-block rounded" src="{{ vich_uploader_asset(app.user.picture) }}" alt="{{ app.user.domain }}"><br>
-
-			{% else %}
-				<img class="card-img-top img-thumbnail img-fluid mx-auto d-block rounded" src="{{ asset('/build/images/partner.jpeg') }}" alt="Photo de profil">
-			{% endif %}
-		</div>
-	</div>
-
-	<div class="col-6 m-5">
-		{{ form_start(form) }}
-		{{ form_widget(form) }}
-		{{ form_end(form) }}
-	</div>
-
-
-{% endblock %}
+	{% endblock %}

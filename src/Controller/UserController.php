@@ -30,15 +30,17 @@ class UserController extends AbstractController
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
 
+        $wines = $user->getWines();
+
         $form = $this->createForm(ProfilePictureType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $fichier = 'public/uploads/pictures/profile' . $user->getPicture();
+            $fichier = 'public/uploads/pictures/profile' . $user->getProfilePicture();
             if (file_exists($fichier)) {
                 unlink($fichier);
             }
-            $user->setPicture('');
+            $user->setProfilePicture('');
             $userRepository->save($user, true);
 
             return $this->redirectToRoute('app_user_profile', [], Response::HTTP_SEE_OTHER);
@@ -46,6 +48,7 @@ class UserController extends AbstractController
 
         return $this->renderForm('user/profile.html.twig', [
             'user' => $user,
+            'wines' => $wines,
             'form' => $form,
         ]);
     }

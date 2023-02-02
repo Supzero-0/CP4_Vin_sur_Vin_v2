@@ -8,6 +8,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Serializable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -16,7 +17,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, Serializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -51,7 +52,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $domain = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $profilePicture = null;
+    private ?string $profilePicture;
 
     #[Vich\UploadableField(mapping: 'profile_file', fileNameProperty: 'profile')]
     private ?File $profileFile = null;
@@ -68,6 +69,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */
+    public function setId(int $id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getEmail(): ?string
@@ -213,14 +226,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPicture(): ?string
+    public function getProfilePicture(): ?string
     {
         return $this->profilePicture;
     }
 
-    public function setPicture(?string $picture): self
+    public function setProfilePicture(?string $profilePicture): self
     {
-        $this->profilePicture = $picture;
+        $this->profilePicture = $profilePicture;
 
         return $this;
     }
@@ -249,5 +262,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->updateAt = $updateAt;
 
         return $this;
+    }
+
+    public function serialize()
+    {
+        return serialize([
+            'id' => $this->getId(),
+            'email' => $this->getEmail(),
+            'password' => $this->getPassword(),
+        ]);
+    }
+
+    public function unserialize($data)
+    {
+        $unserialized = unserialize($data);
+
+        $this
+            ->setId($unserialized['id'])
+            ->setEmail($unserialized['email'])
+            ->setPassword($unserialized['password']);
     }
 }

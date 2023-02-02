@@ -10,8 +10,16 @@ $color-mode-type: data;
         color: black;
     }
 
+    .textMD {
+        color: black;
+    }
+
     .btnDM {
         color: black;
+    }
+
+    .bodyDM {
+        background-color: beige;
     }
 
     //#6c757d gris clair fond carte
@@ -24,8 +32,16 @@ $color-mode-type: data;
         color: white;
     }
 
+    .textMD {
+        color: black;
+    }
+
     .btnDM {
         color: white;
+    }
+
+    .bodyDM {
+        background-color: #212529;
     }
 
     //#343a40 gris foncé fond carte
