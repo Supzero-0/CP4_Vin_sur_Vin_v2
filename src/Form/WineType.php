@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\Appellation;
 use App\Entity\Vineyard;
 use App\Entity\Wine;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -33,6 +32,16 @@ class WineType extends AbstractType
             ->add('vineyard', EntityType::class, [
                 'class' => Vineyard::class,
                 'choice_label' => 'name'
+            ])
+            ->add('pictureFile', VichFileType::class, [
+                'label' => 'Ajouter une photo',
+                'attr' => [
+                    'class' => 'textDM bodyDM mx-0 my-2',
+                    'placeholder' => 'Name',
+                ],
+                'required'      => false,
+                'allow_delete'  => false, // not mandatory, default is true
+                'download_uri' => false, // not mandatory, default is true
             ]);
     }
 

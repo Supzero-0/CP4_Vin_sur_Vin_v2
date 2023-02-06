@@ -99,7 +99,7 @@ class Wine
         return $this;
     }
 
-    public function setPosterFile(File $image = null): Wine
+    public function setPictureFile(File $image = null): Wine
     {
         $this->pictureFile = $image;
         if ($image) {
@@ -108,7 +108,7 @@ class Wine
         return $this;
     }
 
-    public function getPosterFile(): ?File
+    public function getPictureFile(): ?File
     {
         return $this->pictureFile;
     }

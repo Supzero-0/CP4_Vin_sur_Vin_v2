@@ -1,6 +1,6 @@
 <div class="container rounded bg-primary col-12 mx-4 my-4 p-0 shadow rounded-4" id="partner_{{loop.index}}">
-	<div class="card-body d-flex {{ key is even ? 'flex-row' : 'flex-row-reverse' }} ">
-		<div class="col-4">
+	<div class="card-body d-flex {{ key is even ? 'flex-row' : 'flex-row-reverse' }} mx-auto">
+		<div class="col-4 my-auto">
 			{% if user.profilePicture %}
 				<img class="card-img-top img-thumbnail img-fluid mx-auto d-block rounded-4" src="{{ vich_uploader_asset(user.profilePicture) }}" alt="{{ user.domain }}">
 			{% else %}

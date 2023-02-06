@@ -26,3 +26,15 @@ This website as for goal to promote little productor of wine
 ### Account
 
 1. email = partner@vin.com mdp = partner
+
+## Language used
+
+-   HTML, CSS (Bootstrap)
+-   PHP, MySQL (avec tables relationnelles)
+-   Twig, Composer
+-   Symfony
+
+## Website visual
+
+![maquette CP4-1.png](/assets/images/maquette%20CP4-1.png)
+![maquette CP4-2.png](/assets/images/maquette%20CP4-2.png)
